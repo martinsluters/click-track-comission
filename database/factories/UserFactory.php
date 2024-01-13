@@ -29,16 +29,19 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'is_affiliate' => false,
         ];
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
+     * Indicate that the user is an affiliate.
+     *
+     * @return UserFactory
      */
-    public function unverified(): static
+    public function affiliate(): self
     {
-        return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+        return $this->state([
+            'is_affiliate' => true,
         ]);
     }
 }
