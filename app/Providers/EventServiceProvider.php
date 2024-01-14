@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\Affiliate\CodeClickCaptured;
+use App\Listeners\Affiliate\HandleAffiliatedUserRegistration;
 use App\Listeners\Affiliate\HandleCodeClick;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -19,6 +20,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+            HandleAffiliatedUserRegistration::class,
         ],
         CodeClickCaptured::class => [
             HandleCodeClick::class
