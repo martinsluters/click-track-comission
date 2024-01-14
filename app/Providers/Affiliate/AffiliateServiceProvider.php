@@ -2,6 +2,7 @@
 
 namespace App\Providers\Affiliate;
 
+use App\Services\Affiliate\ConversionService;
 use App\Services\Affiliate\CookieService;
 use App\Services\Affiliate\CodeClickService;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +23,10 @@ class AffiliateServiceProvider extends ServiceProvider
                 config('affiliate.cookie_name'),
                 config('affiliate.cookie_expiry_minutes')
             );
+        });
+
+        $this->app->singleton(ConversionService::class, function ($app) {
+            return new ConversionService();
         });
     }
 
