@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Events\Affiliate\CodeClickCaptured;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,6 +22,8 @@ class CaptureCodeClick
         if (is_null($request->query('aff'))) {
             return $next($request);
         }
+
+        event(new CodeClickCaptured($request));
 
         // If the route is the register route, continue.
         if($request->routeIs('register')) {
