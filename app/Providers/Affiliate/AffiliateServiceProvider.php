@@ -2,6 +2,8 @@
 
 namespace App\Providers\Affiliate;
 
+use App\Services\Affiliate\CookieService;
+use App\Services\Affiliate\CodeClickService;
 use Illuminate\Support\ServiceProvider;
 
 class AffiliateServiceProvider extends ServiceProvider
@@ -11,7 +13,16 @@ class AffiliateServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(CodeClickService::class, function ($app) {
+            return new CodeClickService(config('affiliate.query_string_parameter'));
+        });
 
+        $this->app->singleton(CookieService::class, function ($app) {
+            return new CookieService(
+                config('affiliate.cookie_name'),
+                config('affiliate.cookie_expiry_minutes')
+            );
+        });
     }
 
     /**
