@@ -3,6 +3,7 @@
 namespace App\Listeners\Affiliate;
 
 use App\Events\Affiliate\CodeClickCaptured;
+use App\Jobs\Affiliate\UpdateClickCount;
 use App\Services\Affiliate\CodeClickService;
 use App\Services\Affiliate\CookieService;
 
@@ -33,6 +34,8 @@ class HandleCodeClick
         if (false === $click_event) {
             return;
         }
+
+        UpdateClickCount::dispatch($click_event);
 
         // Set the affiliate cookie with the click event. We could throw an exception in the service cache it here and log etc.
         $this->affiliateCodeClickCookieService->setAffiliateCookieWithClickEvent($click_event);
