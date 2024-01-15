@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Affiliate\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
+Route::get('/statistics/{user}/graphical', [StatisticsController::class, 'graphical'])->name('statistics.graphical');
+Route::get('/statistics/{user}/tabular', [StatisticsController::class, 'tabular'])->name('statistics.tabular');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
