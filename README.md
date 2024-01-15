@@ -44,6 +44,24 @@ To run automated tests, please run `sail artisan test`
 
 There are many improvements to be made to the project, but due to time constraints I was not able to implement them.
 
+
+### Other useful commands
+#### SAIL TINKER
+\App\Models\User::factory()->affiliate()->create(); // create user with affiliate role
+
+\App\Models\AffiliateCode::factory()->create() // create affiliate code
+
+\App\Models\AffiliateCodeClickEvent::factory()->create()
+
+\App\Models\AffiliateRegistrationConversion::factory()->create()
+
+#### SAIL
+sail artisan migrate:fresh   // migrate fresh
+sail artisan migrate:fresh --seed   // migrate fresh and seed
+
+#### Create git bundle
+git bundle create repo.bundle --all
+
 ### EER Diagram
 ![EER-Diagram.png](EER-Diagram.png)
 
