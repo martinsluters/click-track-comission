@@ -19,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
-Route::get('/statistics/{user}/graphical', [StatisticsController::class, 'graphical'])->name('statistics.graphical');
-Route::get('/statistics/{user}/tabular', [StatisticsController::class, 'tabular'])->name('statistics.tabular');
+Route::get('/statistics', [StatisticsController::class, 'index'])->middleware('statistical-cache-control-header')->name('statistics');
+Route::get('/statistics/{user}/graphical', [StatisticsController::class, 'graphical'])->middleware('statistical-cache-control-header')->name('statistics.graphical');
+Route::get('/statistics/{user}/tabular', [StatisticsController::class, 'tabular'])->middleware('statistical-cache-control-header')->name('statistics.tabular');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
